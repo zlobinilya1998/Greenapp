@@ -1,7 +1,4 @@
 version: '3'
-networks:
-  app-network:
-    driver: bridge
 services:
   db:
     image: mysql
@@ -10,19 +7,15 @@ services:
       - ${DB_PORT}:3306
     environment:
       MYSQL_ROOT_PASSWORD: ${POSTGRES_PASS}
-    networks:
-      - app-network
   backend:
     build: greenapp-back/
     restart: always
     ports:
-      - ${BACKEND_PORT}:3306
+      - ${BACKEND_PORT}:3001
     environment:
       PG_PASS: ${POSTGRES_PASS}
     depends_on:
       - db
-    networks:
-      - app-network
   adminer:
     image: adminer
     restart: always
@@ -30,8 +23,6 @@ services:
       - ${ADMINER_PORT}:8080
     depends_on:
       - db
-    networks:
-      - app-network
   frontend:
     build: greenapp-front/
     restart: always
@@ -41,5 +32,3 @@ services:
       mode: development
     depends_on:
       - backend
-    networks:
-      - app-network

@@ -20,12 +20,14 @@ app.get('/dashboard', (req, res) => {
 const boostrap = async () => {
     try {
         dbConnect = await mysql.createConnection({
+            host: '172.17.0.1',
+            port: '3306',
             user: 'root',
             password: 'root',
             database: 'mysql'
         });
         console.log('db connected')
-        app.listen(PORT, () => {
+        app.listen(PORT,'localhost',() => {
         console.log('Server has been started on port ' + PORT)
         })
     } catch (e) {
