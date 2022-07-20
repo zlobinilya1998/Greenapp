@@ -1,0 +1,22 @@
+
+:root {
+    --color-green: #3AAC59;
+    --color-white: #FFFFFF;
+    --color-muted: #626262;
+
+
+    --bg-primary: #131313;
+    --bg-secondary: #1C1C1C;
+
+    --border-xs: 3px;
+    --border-xl: 10px;
+
+    --padding-xl: 20px;
+
+    --w-xs: 360px;
+    --w-sm: 600px;
+    --w-md: 1000px - 1px;
+    --w-lg: 1300px - 1px;
+    --w-xl: 1500px - 1px;
+    --w-xxl: 1920px;
+}
