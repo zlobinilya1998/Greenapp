@@ -1,4 +1,11 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Task } from '../../task/entities/task.entity';
 
 interface UserCreationInterface {
   firstName: string;
@@ -23,4 +30,7 @@ export class User extends Model<User, UserCreationInterface> {
 
   @Column({ defaultValue: false })
   isBanned: boolean;
+
+  @HasMany(() => Task)
+  tasks: Task[];
 }
