@@ -1,13 +1,26 @@
 import { Column, Model, Table } from 'sequelize-typescript';
 
-@Table
-export class User extends Model {
+interface UserCreationInterface {
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+}
+
+@Table({ tableName: 'users' })
+export class User extends Model<User, UserCreationInterface> {
   @Column
   firstName: string;
 
   @Column
   lastName: string;
 
-  @Column({ defaultValue: true })
-  isActive: boolean;
+  @Column
+  password: string;
+
+  @Column
+  email: string;
+
+  @Column({ defaultValue: false })
+  isBanned: boolean;
 }
