@@ -32,8 +32,8 @@ services:
     image: node:14.16.1-alpine
     working_dir: /usr/src/app
     volumes:
-      - "./back:/usr/src/app"
-    command: sh -c "cd /server; npm i; npm i nodemon; npm run dev"
+      - "./backend:/usr/src/app"
+    command: sh -c "cd /server; npm i; npm start"
     restart: always
     ports:
       - ${BACKEND_PORT}:3001

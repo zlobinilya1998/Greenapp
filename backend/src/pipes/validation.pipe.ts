@@ -7,6 +7,11 @@ import { ValidationException } from '../exceptions/validation-exception';
 export class ValidationPipe implements PipeTransform<any> {
   async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
     const dto = plainToClass(metadata.metatype, value);
+
+    //Костылик для обхода валидации для примитива
+    const isPrimitive = typeof dto !== 'object';
+    if (isPrimitive) return value;
+
     const errors = await validate(dto);
 
     if (errors.length) {

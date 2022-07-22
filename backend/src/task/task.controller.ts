@@ -8,8 +8,6 @@ import {
   Delete,
   UseGuards,
   Req,
-  ValidationPipe,
-  UsePipes,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -21,7 +19,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth-guard';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @UsePipes(ValidationPipe)
   @Post()
   create(@Body() dto: CreateTaskDto, @Req() req) {
     const { id } = req.user;
