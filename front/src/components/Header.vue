@@ -9,6 +9,7 @@
                 <div class="header-right">
                     <div class="header-wallet">Connect wallet</div>
                     <div class="header-language">EN</div>
+                    <button class="header-login" @click="login">Login</button>
                 </div>
             </div>
         </div>
@@ -17,9 +18,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import {AuthService} from "@/services/AuthService";
 
 @Component({})
 export default class Header extends Vue {
+    login(){
+        AuthService.login();
+    }
 }
 </script>
 
@@ -62,5 +67,6 @@ export default class Header extends Vue {
     border: 1px solid #313131;
     border-radius: var(--border-xs);
     cursor: pointer;
+    margin-right: 20px;
 }
 </style>

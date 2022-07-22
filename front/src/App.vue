@@ -14,11 +14,7 @@ import Header from './components/Header.vue'
 import Footer from "@/components/Footer.vue";
 
 @Component({components: {Footer, Header}})
-export default class App extends Vue {
-    mounted(){
-        console.log(process.env.VUE_APP_BASE_URL)
-    }
-}
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">

@@ -44,9 +44,6 @@ export default class Dashboard extends Vue {
 
     appStore = useAppStore();
     mounted(){
-        this.appStore.getDashboard();
-        this.appStore.getInfo();
-
         setTimeout(() => {
             this.completedTasks = this.user.completed / this.user.tasks * 100 + '%'
         },0)
