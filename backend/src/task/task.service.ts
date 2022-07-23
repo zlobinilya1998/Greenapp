@@ -39,6 +39,10 @@ export class TaskService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} task`;
+    return this.taskRepository.destroy({
+      where: {
+        id,
+      },
+    });
   }
 }

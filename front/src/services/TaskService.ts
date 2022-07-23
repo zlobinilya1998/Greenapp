@@ -14,4 +14,8 @@ export class TaskService {
         const {data} = await Axios.post(this.serviceUrl, dto);
         return data;
     }
+
+    static async remove(id: number) {
+        return await Axios.delete(this.serviceUrl + `/${id}`)
+    }
 }

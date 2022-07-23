@@ -13,7 +13,12 @@ export const useTaskStore = defineStore('taskstore', {
             return this.tasks;
         },
         async createTask(dto: TaskCreateDto){
-            return await TaskService.create(dto);
+            const newTask = await TaskService.create(dto);
+            this.tasks.push(newTask)
+        },
+        async removeTask(id: number) {
+            await TaskService.remove(id);
+            this.tasks = this.tasks.filter(task => task.id !== id);
         }
     },
 })

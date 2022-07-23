@@ -20,11 +20,15 @@ export const useAppStore = defineStore('appstore', {
         },
         async getUserDetails() {
             this.user = await UserService.getUserDetails();
-        }
+        },
+        logout() {
+            this.user = null;
+            AuthService.logout();
+        },
     },
     getters: {
         isLoggedIn(): TUser | null {
-            return this.user
+            return this.user;
         }
     },
 })

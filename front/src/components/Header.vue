@@ -1,14 +1,15 @@
 <template>
     <v-app-bar class="header">
         <div class="header-inner">
-            <router-link to="/">
+            <router-link :to="{name: 'dashboard'}">
                 <img src="../assets/logo.png" style="max-width: 240px;height: 45px" alt="logo">
             </router-link>
             <div class="header-title">Tokenomics</div>
-            <div class="header-right">
-                <div class="mr-2" v-if="user">{{ user.email }}</div>
-                <div class="header-wallet">Connect wallet</div>
-                <div class="header-language">EN</div>
+            <div>
+                <div class="header-right" v-if="isLoggedIn">
+                    <div class="mr-2">{{ user.email }}</div>
+                    <v-btn @click="logout">Выход</v-btn>
+                </div>
             </div>
         </div>
     </v-app-bar>
@@ -17,6 +18,7 @@
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator"
 import {useAppStore} from "@/store/appstore";
+import {AuthService} from "@/services/AuthService";
 
 @Component({})
 export default class Header extends Vue {
@@ -24,6 +26,15 @@ export default class Header extends Vue {
 
     get user() {
         return this.appStore.user;
+    }
+
+    get isLoggedIn() {
+        return this.appStore.isLoggedIn;
+    }
+
+    logout() {
+        this.appStore.logout();
+        this.$router.push({name: 'login'})
     }
 }
 </script>

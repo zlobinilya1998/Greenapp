@@ -25,4 +25,8 @@ export class AuthService {
             return false
         }
     }
+
+    static logout() {
+        localStorage.removeItem(authToken)
+    }
 }

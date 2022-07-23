@@ -1,34 +1,33 @@
 <template>
     <div class="monthly-tasks">
         <v-form ref="form">
-            <v-text-field v-model="task.title" label="Title"/>
-            <v-text-field v-model="task.description" label="Description"/>
+            <v-text-field v-model="task.title" :rules="[validationRules.requiredRule]" label="Заголовок"/>
+            <v-text-field v-model="task.description" :rules="[validationRules.requiredRule]" label="Описание"/>
         </v-form>
         <div class="tasks-header">
-            <h2 class="tasks-title">Monthly tasks</h2>
-            <div class="tasks-actions">
-                <div class="dashboard-task-progress">
-                    <p class="task-progress-title" v-html="`${completedTasks} task completed`"/>
+            <h2 class="tasks-title">Список задач</h2>
+            <v-slide-x-transition>
+                <div class="dashboard-task-progress" v-if="tasks && tasks.length">
+                    <p class="task-progress-title" v-html="`${completedTasks} задач выполнено`"/>
                     <div class="task-progress-container">
                         <div :style="{maxWidth: completedTasks}" class="task-progress-bar"/>
                     </div>
                 </div>
-                <v-btn @click="addTask" :loading="loading" color="primary">Add task</v-btn>
-            </div>
+            </v-slide-x-transition>
+            <v-btn @click="addTask" :loading="loading" color="primary">Добавить</v-btn>
         </div>
-
-        <v-progress-circular indeterminate color="primary" v-if="loading" style="display: block;margin: 0 auto"
-                             size="50"/>
-        <div class="tasks-container" v-else-if="tasks">
-            <div v-for="(task,index) in tasks" :key="index" class="monthly-task">
+        <v-progress-circular indeterminate color="primary" v-if="loading" style="display: block;margin: 0 auto" size="50"/>
+        <v-fade-transition group leave-absolute class="tasks-container" v-else-if="tasks && tasks.length">
+            <div v-for="task in tasks" :key="task.id" class="monthly-task">
                 <div class="task-content">
                     <p class="task-title" v-html="task.title"/>
                     <p class="task-description" v-html="task.description"/>
-                    <div>Completed {{task.isCompleted}}</div>
-                    <v-btn color="error">Delete</v-btn>
+                    <div>Completed {{ task.isCompleted }}</div>
+                    <v-btn class="mt-2" color="error" @click="removeTask(task.id)">Удалить</v-btn>
                 </div>
             </div>
-        </div>
+        </v-fade-transition>
+        <div v-else class="mt-2">Задач пока нет...</div>
     </div>
 </template>
 
@@ -37,31 +36,37 @@ import {Component, Ref, Vue} from "vue-property-decorator"
 import {useAppStore} from "@/store/appstore";
 import {TaskService} from "@/services/TaskService";
 import {useTaskStore} from "@/store/taskstore";
+import {ValidationRules} from "@/helpers/ValidationRules";
 
 @Component({})
 export default class MonthlyTasks extends Vue {
-    @Ref('form') loginForm: { validate: () => boolean };
+    @Ref('form') addTaskForm: { validate: () => boolean, reset: () => void };
 
+    validationRules = ValidationRules
     task = {
-        title: 'My first task',
-        description: 'Task description',
+        title: '',
+        description: '',
     }
     loading = false;
 
     taskStore = useTaskStore();
 
     async addTask() {
-        await this.taskStore.createTask(this.task)
-        await this.loadTasks();
-
+        if (!this.addTaskForm.validate()) return;
+        await this.taskStore.createTask(this.task);
         this.task = {
             title: '',
             description: ''
         }
+        this.addTaskForm.reset();
     }
 
     async loadTasks() {
         await this.taskStore.getTasks();
+    }
+
+    async removeTask(id: number) {
+        await this.taskStore.removeTask(id)
     }
 
     get tasks() {
@@ -95,6 +100,8 @@ export default class MonthlyTasks extends Vue {
 
     .tasks-actions {
         display: flex;
+        flex: 1;
+        justify-content: flex-end;
     }
 
     .action-btn {
@@ -115,18 +122,16 @@ export default class MonthlyTasks extends Vue {
         color: var(--color-muted);
         display: flex;
         align-items: center;
-        flex: 0 1 300px;
     }
 
     .task-progress-title {
         margin: 0 20px 0 0;
-        flex: 0 1 auto;
     }
 
     .task-progress-container {
         height: 10px;
         border-radius: var(--border-xl);
-        flex: 1;
+        width: 150px;
         background: var(--color-muted);
         overflow: hidden;
     }
@@ -144,7 +149,7 @@ export default class MonthlyTasks extends Vue {
     }
 
     .monthly-task {
-        flex: 50%;
+        flex: 0 1 50%;
         padding: 10px;
     }
 
@@ -156,10 +161,12 @@ export default class MonthlyTasks extends Vue {
 
     .task-title {
         color: var(--color-white);
+        text-transform: capitalize;
     }
 
     .task-description {
         color: var(--color-muted);
+        text-transform: capitalize;
     }
 }
 </style>
