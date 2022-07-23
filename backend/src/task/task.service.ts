@@ -10,6 +10,7 @@ export class TaskService {
     @InjectModel(Task)
     private readonly taskRepository: typeof Task,
   ) {}
+
   async create(dto: CreateTaskDto) {
     const task = await this.taskRepository.create(dto);
     return task;
@@ -20,6 +21,7 @@ export class TaskService {
       where: {
         userId,
       },
+      order: [],
     });
   }
 

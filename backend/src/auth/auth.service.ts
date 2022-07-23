@@ -17,10 +17,12 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
+
   async login(dto: CreateAuthDto) {
     const user = await this.validateUser(dto);
     return this.generateToken(user);
   }
+
   async register(dto: CreateUserDto) {
     const candidate = await this.userService.getByEmail(dto.email);
     if (candidate)
@@ -52,8 +54,17 @@ export class AuthService {
     }
     return user;
   }
+
   async generateToken(user: User) {
-    const payload = { email: user.email, id: user.id };
+    const payload = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      id: user.id,
+      isBanned: user.isBanned,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
     return {
       token: this.jwtService.sign(payload),
     };
