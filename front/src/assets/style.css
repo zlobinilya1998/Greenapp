@@ -1,3 +1,6 @@
+body {
+    color: var(--color-white);
+}
 
 :root {
     --color-green: #3AAC59;

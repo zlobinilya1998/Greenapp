@@ -1,37 +1,52 @@
 <template>
-    <div id="app">
-        <Header/>
-        <router-view class="container view"/>
-        <Footer/>
-    </div>
+    <v-app>
+        <v-main>
+            <Header/>
+            <div class="app-container">
+                <router-view/>
+            </div>
+            <Footer/>
+        </v-main>
+        <ReactiveState/>
+    </v-app>
 </template>
 
-
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import Header from './components/Header.vue'
 import Footer from "@/components/Footer.vue";
+import Header from "@/components/Header.vue"
+import {Component, Vue} from "vue-property-decorator"
+import ReactiveState from "@/components/ReactiveState.vue";
 
-@Component({components: {Footer, Header}})
-export default class App extends Vue {}
+@Component({
+    components: {
+        ReactiveState,
+        Footer, Header
+    }
+})
+export default class App extends Vue {
+}
+
+
 </script>
 
 <style lang="scss">
 @import "./assets/normalize.css";
 @import "./assets/style.css";
-#app {
-    min-height: 100vh;
-    background: var(--bg-primary);
-    padding-top: 100px;
+
+.v-main__wrap {
+    display: flex;
+    flex-direction: column;
 }
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 21px;
-}
-.container.view {
-    padding: 20px 20px 50px 20px;
+
+.app-container {
     flex: 1;
+    background: var(--bg-primary);
+    padding: 20px;
+}
+
+.container {
+    max-width: 1420px;
+    margin: 0 auto;
+    padding: 20px;
 }
 </style>

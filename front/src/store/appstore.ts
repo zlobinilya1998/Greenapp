@@ -1,21 +1,31 @@
 import {defineStore} from 'pinia'
-import {DashboardService} from "@/services/DashboardService";
-import {Dashboard} from "@/models/entites/Dashboard";
+import {TUser} from "@/models/entites/User";
+import {AuthService} from "@/services/AuthService";
+import {UserService} from "@/services/UserService";
+import {LoginDto, RegisterDto} from "@/dto";
 
 export const useAppStore = defineStore('appstore', {
     state: () => ({
-        dashboard: null as Dashboard | null,
-        info: null,
+        user: null as TUser | null,
         tasks: null as [] | null,
     }),
     actions: {
-        async getTasks() {
-            this.tasks = await DashboardService.getTasks();
-            return this.tasks;
+        async login(form: LoginDto) {
+            await AuthService.login(form);
+            await this.getUserDetails();
         },
-        async addTask() {
-            return DashboardService.addTask();
+        async register(form: RegisterDto) {
+            await AuthService.register(form);
+
         },
+        async getUserDetails() {
+            this.user = await UserService.getUserDetails();
+        }
+    },
+    getters: {
+        isLoggedIn(): TUser | null {
+            return this.user
+        }
     },
 })
 
