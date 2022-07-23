@@ -17,6 +17,8 @@ services:
     depends_on:
       - mysql
   frontend:
+    env_file:
+      - .env.development
     image: node:14.16.1-alpine
     volumes:
       - "./front:/app"
