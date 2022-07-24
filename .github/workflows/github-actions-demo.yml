@@ -6,8 +6,10 @@ jobs:
     strategy:
       matrix:
         node-version: [ 14.16.1 ]
+    defaults:
+      run:
+        working-directory: ./front
     steps:
-      - run: cd front
       - uses: actions/checkout@v3
       - name: Starting Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
