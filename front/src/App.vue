@@ -8,6 +8,7 @@
             <Footer/>
         </v-main>
         <ReactiveState/>
+        <Localization/>
     </v-app>
 </template>
 
@@ -16,9 +17,11 @@ import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue"
 import {Component, Vue} from "vue-property-decorator"
 import ReactiveState from "@/components/ReactiveState.vue";
+import Localization from "@/components/Localization.vue";
 
 @Component({
     components: {
+        Localization,
         ReactiveState,
         Footer, Header
     }

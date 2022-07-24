@@ -8,6 +8,7 @@
             <div>
                 <div class="header-right" v-if="isLoggedIn">
                     <div class="mr-2">{{ user.email }}</div>
+                    <locale-select/>
                     <v-btn @click="logout">Выход</v-btn>
                 </div>
             </div>
@@ -16,11 +17,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator"
+import {Component, Vue, Watch} from "vue-property-decorator"
 import {useAppStore} from "@/store/appstore";
 import {AuthService} from "@/services/AuthService";
+import {Locales, LocalizationKey} from "@/localization";
+import LocaleSelect from "@/components/shared/LocaleSelect.vue";
 
-@Component({})
+@Component({
+    components: {LocaleSelect}
+})
 export default class Header extends Vue {
     appStore = useAppStore();
 

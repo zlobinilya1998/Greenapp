@@ -3,10 +3,12 @@ import {TUser} from "@/models/entites/User";
 import {AuthService} from "@/services/AuthService";
 import {UserService} from "@/services/UserService";
 import {LoginDto, RegisterDto} from "@/dto";
+import {Locales, LocalizationKey} from "@/localization";
 
 export const useAppStore = defineStore('appstore', {
     state: () => ({
         user: null as TUser | null,
+        locale: Locales.Ru as LocalizationKey,
         tasks: null as [] | null,
     }),
     actions: {
@@ -16,10 +18,13 @@ export const useAppStore = defineStore('appstore', {
         },
         async register(form: RegisterDto) {
             await AuthService.register(form);
-
         },
         async getUserDetails() {
             this.user = await UserService.getUserDetails();
+            this.locale = this.user.locale;
+        },
+        async changeLocale(locale: LocalizationKey){
+            return UserService.changeLocale(locale);
         },
         logout() {
             this.user = null;

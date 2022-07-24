@@ -13,3 +13,7 @@ export interface TaskCreateDto {
     title: string;
     description: string
 }
+
+export interface TokenCreateDto {
+    address: string;
+}

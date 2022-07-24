@@ -21,7 +21,7 @@ export class Token extends Model<Token, TokenCreationInterface> {
   round: string;
 
   @Column
-  allocation: boolean;
+  allocation: number;
 
   @Column
   blocked: number;
