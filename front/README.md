@@ -1,5 +1,3 @@
-# pinia
-
 ## Project setup
 ```
 npm install
