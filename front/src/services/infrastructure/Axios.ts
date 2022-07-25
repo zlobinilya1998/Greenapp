@@ -9,6 +9,7 @@ const Axios = axios.create({
     timeout: 1000,
 });
 
+
 Axios.interceptors.request.use(function (request) {
     const token = localStorage.getItem(authToken);
     if (token) request.headers!['Authorization'] = `Bearer ${token}`

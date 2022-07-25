@@ -1,11 +1,10 @@
-version: '3'
 services:
   mysql:
     image: mysql
-    restart: always
     container_name: database
+    restart: always
     ports:
-      - ${DB_PORT}:3306
+      - "3306:3306"
     volumes:
       - db:/var/lib/mysql
     environment:
@@ -16,34 +15,35 @@ services:
       retries: 10
   adminer:
     image: adminer
-    restart: always
     container_name: adminer
+    restart: always
     ports:
-      - ${ADMINER_PORT}:8080
+      - "3002:8080"
     depends_on:
       - mysql
   frontend:
     build: front/
-    restart: always
     container_name: frontend
+    restart: always
     ports:
-      - ${FRONTEND_PORT}:80
+      - "80:80"
     environment:
       mode: production
-      VUE_APP_BASE_URL: backend
+      VUE_APP_BACKEND: backend
     depends_on:
       - backend
   backend:
     build: backend/
-    restart: always
     container_name: backend
+    restart: always
     ports:
-      - ${BACKEND_PORT}:3001
+      - "3001:3001"
     environment:
       DB_HOST: mysql
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
+      APP_PORT: 3001
     depends_on:
       - mysql
 volumes:
