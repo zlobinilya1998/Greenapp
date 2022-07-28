@@ -1,7 +1,7 @@
 <template></template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator"
+import {Component, Vue, Watch} from "vue-property-decorator"
 import {Locales, localization, LocalizationKey, Phrase} from '@/localization'
 import {useAppStore} from "@/store/appstore";
 
@@ -11,12 +11,8 @@ export default class Localization extends Vue {
     localization = localization;
     locales = Locales;
 
-    get locale() {
+    get locale(): LocalizationKey {
         return this.appStore.locale;
-    }
-
-    set locale(val: LocalizationKey) {
-        this.appStore.locale = val;
     }
 
     localesList = Object.entries(this.locales).map(locale => locale[1])

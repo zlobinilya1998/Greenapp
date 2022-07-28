@@ -31,22 +31,6 @@ export default class Footer extends Vue {
                 {title: 'Github', href: 'Github'},
             ]
         },
-        {
-            title: 'Контакты',
-            links: [
-                {title: 'Telegram', href: 'Telegram'},
-                {title: 'Twitter', href: 'Twitter'},
-                {title: 'Github', href: 'Github'},
-            ]
-        },
-        {
-            title: 'Контакты',
-            links: [
-                {title: 'Telegram', href: 'Telegram'},
-                {title: 'Twitter', href: 'Twitter'},
-                {title: 'Github', href: 'Github'},
-            ]
-        },
     ]
 }
 </script>

@@ -3,9 +3,14 @@ import {Token} from "@/models/entites/Token";
 import {TokenService} from "@/services/TokenService";
 import {TokenCreateDto} from "@/dto";
 
-export const useTokenStore = defineStore('tokenstore', {
-    state: () => ({
-        tokens: [] as Token[],
+interface State {
+    tokens: Token[]
+}
+
+
+export const useTokenStore = defineStore('token', {
+    state: (): State => ({
+        tokens: [],
     }),
     actions: {
         async getTokens() {
@@ -26,7 +31,8 @@ export const useTokenStore = defineStore('tokenstore', {
         },
         async removeToken(id: number) {
             await TokenService.remove(id);
-            this.tokens = this.tokens.filter(tokens => tokens.id !== id);
+            this.tokens = this.tokens.filter(token => token.id !== id);
         }
     },
+    getters: {}
 })

@@ -4,7 +4,6 @@
             <router-link :to="{name: 'dashboard'}">
                 <img src="../assets/logo.png" style="max-width: 240px;height: 45px" alt="logo">
             </router-link>
-            <div class="header-title">Tokenomics</div>
             <div>
                 <div class="header-right" v-if="isLoggedIn">
                     <div class="mr-2">{{ user.email }}</div>
@@ -48,7 +47,10 @@ export default class Header extends Vue {
 .header {
     color: var(--color-green);
     background: var(--bg-secondary) !important;
-    flex: 0 1 auto
+    flex: 0 1 auto;
+    .locale-select {
+        margin: 0 10px;
+    }
 }
 
 .header-inner {
@@ -58,12 +60,6 @@ export default class Header extends Vue {
     flex: 1;
 }
 
-.header-title {
-    color: var(--color-white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-}
 
 .header-right {
     display: flex;

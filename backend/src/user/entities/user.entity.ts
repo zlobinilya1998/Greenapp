@@ -27,9 +27,6 @@ export class User extends Model<User, UserCreationInterface> {
   @Column
   email: string;
 
-  @Column({ defaultValue: 'ru' })
-  locale: string;
-
   @Column({ defaultValue: false })
   isBanned: boolean;
 

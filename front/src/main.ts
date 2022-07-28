@@ -9,11 +9,15 @@ import { createPinia,PiniaVuePlugin } from 'pinia'
 Vue.use(PiniaVuePlugin)
 const pinia = createPinia()
 
+import VueRouter from "vue-router";
+Vue.use(VueRouter)
+
+
 Vue.config.productionTip = false
 
 new Vue({
-  router,
   pinia,
+  router,
   vuetify,
   render: h => h(App)
 }).$mount('#app')

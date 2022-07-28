@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-text-field v-model="search" label="Поиск по адресу"/>
+        <v-text-field v-model="search" label="Поиск по адресу" v-if="tokens.length"/>
         <v-data-table
             :loading="loading"
             :headers="headers"

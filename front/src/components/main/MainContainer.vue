@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <router-view class="container"></router-view>
 </template>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ export default class MainContainer extends Vue {
         const isTokenValid = await AuthService.checkToken();
         if (isTokenValid) {
             await this.appStore.getUserDetails()
-            await this.$router.push({name: 'dashboard'})
+            await this.$router.push({name: 'dashboard'}).catch(e => e)
         } else {
             await this.$router.push({name: 'login'})
         }

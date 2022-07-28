@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
+import {Component, Vue} from "vue-property-decorator"
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue"
-import {Component, Vue} from "vue-property-decorator"
 import ReactiveState from "@/components/ReactiveState.vue";
 import Localization from "@/components/Localization.vue";
 
@@ -23,11 +23,11 @@ import Localization from "@/components/Localization.vue";
     components: {
         Localization,
         ReactiveState,
-        Footer, Header
+        Footer,
+        Header,
     }
 })
-export default class App extends Vue {
-}
+export default class App extends Vue {}
 
 
 </script>

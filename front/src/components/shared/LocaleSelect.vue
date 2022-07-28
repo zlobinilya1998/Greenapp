@@ -1,11 +1,13 @@
 <template>
     <v-select
+        class="locale-select"
         :style="{maxWidth: '50px'}"
         :items="locales"
         item-text="text"
         item-value="value"
+        single-line
         v-model="locale"
-    ></v-select>
+    />
 </template>
 
 <script lang="ts">
@@ -13,7 +15,7 @@ import {Component, Vue, Watch} from "vue-property-decorator"
 import {LocalizationKey} from "@/localization";
 import {useAppStore} from "@/store/appstore";
 
-@Component({})
+@Component
 export default class LocaleSelect extends Vue {
     appStore = useAppStore();
 
@@ -21,13 +23,9 @@ export default class LocaleSelect extends Vue {
         return this.appStore.locale
     }
 
-    @Watch('locale')
-    changeUserLocale(val: LocalizationKey) {
-        this.appStore.changeLocale(val);
-    }
-
     set locale(val: LocalizationKey) {
         this.appStore.locale = val;
+        localStorage.setItem('locale',val)
     }
 
     get locales() {
@@ -37,5 +35,12 @@ export default class LocaleSelect extends Vue {
 </script>
 
 <style lang="scss">
-
+.locale-select {
+    .v-input__slot {
+        margin-bottom: unset;
+    }
+    .v-text-field__details {
+        display: none;
+    }
+}
 </style>

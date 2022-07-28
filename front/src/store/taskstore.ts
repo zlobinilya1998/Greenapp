@@ -3,9 +3,12 @@ import {TaskService} from "@/services/TaskService";
 import {TaskCreateDto} from "@/dto";
 import {Task} from "@/models/entites/Tasks";
 
-export const useTaskStore = defineStore('taskstore', {
-    state: () => ({
-        tasks: null as Task[] | null,
+interface State {
+    tasks: Task[] | null
+}
+export const useTaskStore = defineStore('task', {
+    state: (): State => ({
+        tasks: null,
     }),
     actions: {
         async getTasks(){

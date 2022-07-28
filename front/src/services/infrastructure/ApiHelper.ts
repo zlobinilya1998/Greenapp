@@ -3,4 +3,3 @@ export default class ApiHelper {
     static apiUrl = this.baseUrl + '/api'
 }
 
-console.log(ApiHelper.baseUrl, process.env)

@@ -35,15 +35,6 @@ export class UserService {
     return `This action updates a #${id} user`;
   }
 
-  async changeLocale(id: number, locale: string) {
-    return await this.userRepository.update(
-      {
-        locale,
-      },
-      { where: { id } },
-    );
-  }
-
   remove(id: number) {
     return `This action removes a #${id} user`;
   }

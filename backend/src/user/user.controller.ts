@@ -48,11 +48,4 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
-
-  @UseGuards(JwtAuthGuard)
-  @Post('localeChange/:locale')
-  async changeLocale(@Param('locale') locale, @Req() req) {
-    const { id } = req.user;
-    return this.userService.changeLocale(id, locale);
-  }
 }

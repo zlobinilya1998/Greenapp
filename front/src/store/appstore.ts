@@ -5,11 +5,15 @@ import {UserService} from "@/services/UserService";
 import {LoginDto, RegisterDto} from "@/dto";
 import {Locales, LocalizationKey} from "@/localization";
 
-export const useAppStore = defineStore('appstore', {
-    state: () => ({
-        user: null as TUser | null,
-        locale: Locales.Ru as LocalizationKey,
-        tasks: null as [] | null,
+interface State {
+    user: TUser | null,
+    locale: LocalizationKey | any,
+}
+
+export const useAppStore = defineStore('app', {
+    state: (): State => ({
+        user: null,
+        locale: localStorage.getItem('locale') || Locales.Ru,
     }),
     actions: {
         async login(form: LoginDto) {
@@ -21,10 +25,6 @@ export const useAppStore = defineStore('appstore', {
         },
         async getUserDetails() {
             this.user = await UserService.getUserDetails();
-            this.locale = this.user.locale;
-        },
-        async changeLocale(locale: LocalizationKey){
-            return UserService.changeLocale(locale);
         },
         logout() {
             this.user = null;
@@ -32,9 +32,7 @@ export const useAppStore = defineStore('appstore', {
         },
     },
     getters: {
-        isLoggedIn(): TUser | null {
-            return this.user;
-        }
+        isLoggedIn: state => state.user,
     },
 })
 
