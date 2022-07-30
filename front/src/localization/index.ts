@@ -1,9 +1,13 @@
 export const localization = {
     ru: {
         'Hello': 'Привет',
+        'Purchase': 'В корзину',
+        'ProductNotFound': 'Товар не найден',
     },
     en: {
         'Hello': 'Hello',
+        'Purchase': 'Purchase',
+        'ProductNotFound': 'Product not found',
     },
 }
 

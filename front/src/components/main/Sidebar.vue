@@ -48,14 +48,19 @@ export type NavLink = {
 export default class Sidebar extends Vue {
     navs: NavLink[] = [
         {
-            name: 'Главная',
-            icon: 'mdi-home',
+            name: 'Профиль',
+            icon: 'mdi-account',
             path: 'dashboard',
         },
         {
             name: 'Каталог',
             icon: 'mdi-shopping',
             path: 'catalog',
+        },
+        {
+            name: 'Корзина',
+            icon: 'mdi-cart',
+            path: 'cart',
         },
     ]
     appStore = useAppStore()

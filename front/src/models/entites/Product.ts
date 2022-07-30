@@ -5,4 +5,5 @@ export type TProduct = {
     liked: boolean,
     img: string,
     id: number,
+    qty?: number,
 }

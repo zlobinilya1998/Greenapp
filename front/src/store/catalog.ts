@@ -2,7 +2,8 @@ import {defineStore} from 'pinia'
 import {TProduct} from "@/models/entites/Product";
 
 interface State {
-    products: TProduct[]
+    products: TProduct[],
+    cart: TProduct[],
 }
 
 export const useCatalogStore = defineStore('catalog', {
@@ -57,6 +58,25 @@ export const useCatalogStore = defineStore('catalog', {
                 id: 6,
             },
         ],
+        cart: [],
     }),
+    actions: {
+        addToCart(productId: number) {
+            const product = this.products.find(item => item.id === productId);
+            if (!product) throw new Error('Product not found');
+
+            const cartProduct = this.cart.find(item => item.id === product.id);
+
+            if (cartProduct) return cartProduct.qty += 1;
+
+            this.cart.push({...product,qty: 1});
+        },
+        removeFromCart(productId: number) {
+             this.cart = this.cart.filter(item => item.id !== productId);
+        }
+    },
+    getters: {
+        isItemInCart: (state) => (productId: number) => state.cart.find(item => item.id === productId)
+    }
 })
 

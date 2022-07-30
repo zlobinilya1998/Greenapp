@@ -2,11 +2,25 @@
     <div class="catalog-product">
         <div class="product-inner">
             <v-img :src="item.img" contain max-height="250" max-width="250" class="product-img">
-                <div class="product-discount" v-html="`—${discountPercent()}`"/>
+                <div class="product-discount" v-html="`—${discountPercent}`"/>
             </v-img>
-            <p class="product-old-price" v-html="localeOldPrice()"/>
-            <p class="product-new-price" v-html="localeNewPrice()"/>
+            <p class="product-old-price" v-html="localeOldPrice"/>
+            <p class="product-new-price" v-html="localeNewPrice"/>
             <p class="product-name" v-html="item.name"/>
+            <v-fade-transition leave-absolute>
+                <div class="product-actions">
+                    <div v-if="isItemOnCart">
+                        <v-btn class="change-qty" @click="removeQty">
+                            <v-icon v-html="'mdi-minus'"/>
+                        </v-btn>
+                        {{ isItemOnCart.qty }} шт.
+                        <v-btn class="change-qty" @click="addQty">
+                            <v-icon v-html="'mdi-plus'"/>
+                        </v-btn>
+                    </div>
+                    <v-btn v-else  max-width="110" v-html="$l.phrase('Purchase')" @click="addToCart"/>
+                </div>
+            </v-fade-transition>
         </div>
     </div>
 </template>
@@ -14,21 +28,44 @@
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-property-decorator"
 import {TProduct} from "@/models/entites/Product";
-import {getDiscountPercent, getLocalePrice } from "@/helpers/Prices";
+import {getDiscountPercent, getLocalePrice} from "@/helpers/Prices";
+import {useCatalogStore} from "@/store/catalog";
 
 @Component({})
 export default class Product extends Vue {
     @Prop({required: true}) item: TProduct;
 
+    catalogStore = useCatalogStore();
 
-    discountPercent() {
-        return getDiscountPercent(this.item.newPrice,this.item.oldPrice)
+    addToCart() {
+        this.catalogStore.addToCart(this.item.id)
     }
 
-    localeNewPrice() {
+    get isItemOnCart() {
+        return this.catalogStore.isItemInCart(this.item.id)
+    }
+
+    addQty() {
+        this.isItemOnCart.qty += 1;
+    }
+
+    removeQty() {
+        if (this.isItemOnCart.qty === 1) {
+            this.catalogStore.cart = this.catalogStore.cart.filter(product => product.id !== this.item.id);
+            return;
+        }
+        this.isItemOnCart.qty -= 1;
+    }
+
+    get discountPercent() {
+        return getDiscountPercent(this.item.newPrice, this.item.oldPrice)
+    }
+
+    get localeNewPrice() {
         return getLocalePrice(this.item.newPrice)
     }
-    localeOldPrice() {
+
+    get localeOldPrice() {
         return getLocalePrice(this.item.oldPrice)
     }
 }
@@ -39,6 +76,7 @@ export default class Product extends Vue {
 .catalog-product {
     padding: 10px;
     display: flex;
+
     .product-inner {
         display: flex;
         flex-direction: column;
@@ -50,11 +88,12 @@ export default class Product extends Vue {
     }
 
     .product-old-price {
-        margin-bottom: 5px;
+        margin-bottom: unset;
         padding: 10px;
         position: relative;
         max-width: fit-content;
         font-size: 0.9rem;
+
         &:before {
             content: "";
             border-bottom: 1px solid red;
@@ -72,6 +111,7 @@ export default class Product extends Vue {
         color: var(--color-white);
         flex: 0 1 auto;
         font-weight: 500;
+        margin-bottom: 5px;
     }
 
     .product-name {
@@ -91,6 +131,14 @@ export default class Product extends Vue {
         max-width: fit-content;
         border-radius: 0 15% 15% 0;
         font-size: .8rem;
+    }
+
+    .product-actions {
+        margin: auto 10px 10px;
+        .change-qty {
+            min-width: unset;
+            padding: 0 10px;
+        }
     }
 }
 </style>

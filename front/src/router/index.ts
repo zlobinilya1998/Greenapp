@@ -20,6 +20,11 @@ const routes: Array<RouteConfig> = [
                 ],
             },
             {
+                path: '/cart',
+                name: 'cart',
+                component: () => import('@/components/Cart.vue'),
+            },
+            {
                 path: '/dashboard', name: 'dashboard', component: () => import('@/components/Dashboard.vue'),
                 meta: {
                     requiredAuth: true,
