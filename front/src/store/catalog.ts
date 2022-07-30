@@ -66,7 +66,6 @@ export const useCatalogStore = defineStore('catalog', {
             if (!product) throw new Error('Product not found');
 
             const cartProduct = this.cart.find(item => item.id === product.id);
-
             if (cartProduct) return cartProduct.qty += 1;
 
             this.cart.push({...product,qty: 1});
@@ -76,7 +75,8 @@ export const useCatalogStore = defineStore('catalog', {
         }
     },
     getters: {
-        isItemInCart: (state) => (productId: number) => state.cart.find(item => item.id === productId)
+        isItemInCart: (state) => (productId: number): TProduct | undefined => state.cart.find(item => item.id === productId),
+        productsInCart: (state) => state.cart.reduce((acc,curValue) => acc + curValue.qty,0)
     }
 })
 

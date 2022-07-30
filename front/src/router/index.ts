@@ -16,13 +16,19 @@ const routes: Array<RouteConfig> = [
                         name: 'catalog',
                         path: '',
                         component: () => import('@/components/catalog/Highlights.vue'),
-                    }
+                        meta: {
+                            title: 'Каталог',
+                        }
+                    },
+                    {
+                        path: 'cart',
+                        name: 'cart',
+                        component: () => import('@/components/Cart.vue'),
+                        meta: {
+                            title: 'Корзина',
+                        }
+                    },
                 ],
-            },
-            {
-                path: '/cart',
-                name: 'cart',
-                component: () => import('@/components/Cart.vue'),
             },
             {
                 path: '/dashboard', name: 'dashboard', component: () => import('@/components/Dashboard.vue'),

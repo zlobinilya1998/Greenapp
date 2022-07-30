@@ -34,7 +34,6 @@ import {useCatalogStore} from "@/store/catalog";
 @Component({})
 export default class Product extends Vue {
     @Prop({required: true}) item: TProduct;
-
     catalogStore = useCatalogStore();
 
     addToCart() {
@@ -51,7 +50,7 @@ export default class Product extends Vue {
 
     removeQty() {
         if (this.isItemOnCart.qty === 1) {
-            this.catalogStore.cart = this.catalogStore.cart.filter(product => product.id !== this.item.id);
+            this.catalogStore.removeFromCart(this.item.id);
             return;
         }
         this.isItemOnCart.qty -= 1;

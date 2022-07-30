@@ -22,6 +22,12 @@
                     <v-list-item>
                         <v-list-item-icon>
                             <v-icon v-html="item.icon"/>
+                            <v-badge
+                                overlap
+                                v-if="productsInCart && item.path === 'cart'"
+                                color="green"
+                                :content="productsInCart"
+                            />
                         </v-list-item-icon>
                         <v-list-item-title v-html="item.name"/>
                     </v-list-item>
@@ -35,6 +41,7 @@
 import {Component, Vue} from "vue-property-decorator"
 import {useAppStore} from "@/store/appstore";
 import {TUser} from "@/models/entites/User";
+import {useCatalogStore} from "@/store/catalog";
 
 
 export type NavLink = {
@@ -64,8 +71,16 @@ export default class Sidebar extends Vue {
         },
     ]
     appStore = useAppStore()
+    catalogStore = useCatalogStore();
+
+
+    get productsInCart(): number {
+        return this.catalogStore.productsInCart;
+    }
+
     get user(): TUser {
         return this.appStore.user;
     }
+
 }
 </script>

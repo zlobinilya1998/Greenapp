@@ -3,11 +3,13 @@ export const localization = {
         'Hello': 'Привет',
         'Purchase': 'В корзину',
         'ProductNotFound': 'Товар не найден',
+        'EmptyCart': 'Корзина пуста',
     },
     en: {
         'Hello': 'Hello',
         'Purchase': 'Purchase',
         'ProductNotFound': 'Product not found',
+        'EmptyCart': 'Cart is empty',
     },
 }
 

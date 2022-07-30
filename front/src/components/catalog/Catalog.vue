@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Каталог</h2>
+        <h2 v-html="$route.meta.title" class="mb-4"/>
         <router-view/>
     </div>
 </template>

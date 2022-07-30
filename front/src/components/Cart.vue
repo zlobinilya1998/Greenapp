@@ -1,9 +1,13 @@
 <template>
-    <div>
-        <h2>Корзина</h2>
-        <div>
-            <div v-for="product in cart" :key="product.id">{{product}}</div>
-        </div>
+    <div v-if="cart.length">
+        <div v-for="product in cart" :key="product.id">{{ product }}</div>
+    </div>
+    <div v-else>
+        <p v-html="$l.phrase('EmptyCart')"/>
+        <p>Перейдите в
+            <router-link :to="{name: 'catalog'}">каталог</router-link>
+            для поиска лучших товаров!
+        </p>
     </div>
 </template>
 
