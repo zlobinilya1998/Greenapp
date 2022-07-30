@@ -7,8 +7,8 @@
             <p class="product-old-price" v-html="localeOldPrice"/>
             <p class="product-new-price" v-html="localeNewPrice"/>
             <p class="product-name" v-html="item.name"/>
-            <v-fade-transition leave-absolute>
-                <div class="product-actions">
+            <div class="product-actions">
+                <v-slide-x-transition mode="out-in">
                     <div v-if="isItemOnCart">
                         <v-btn class="change-qty" @click="removeQty">
                             <v-icon v-html="'mdi-minus'"/>
@@ -18,9 +18,9 @@
                             <v-icon v-html="'mdi-plus'"/>
                         </v-btn>
                     </div>
-                    <v-btn v-else  max-width="110" v-html="$l.phrase('Purchase')" @click="addToCart"/>
-                </div>
-            </v-fade-transition>
+                    <v-btn v-else max-width="110" v-html="$l.phrase('Purchase')" @click="addToCart"/>
+                </v-slide-x-transition>
+            </div>
         </div>
     </div>
 </template>
@@ -135,6 +135,7 @@ export default class Product extends Vue {
 
     .product-actions {
         margin: auto 10px 10px;
+
         .change-qty {
             min-width: unset;
             padding: 0 10px;
