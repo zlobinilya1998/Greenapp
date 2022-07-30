@@ -1,20 +1,26 @@
 <template>
-  <router-view class="container"></router-view>
+    <div style="display: flex">
+        <sidebar/>
+        <router-view/>
+    </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import {Component, Vue} from "vue-property-decorator"
 import {useAppStore} from "@/store/appstore";
 import {AuthService} from "@/services/AuthService";
+import Sidebar from "@/components/main/Sidebar.vue";
 
-@Component({})
+@Component({
+    components: {Sidebar}
+})
 export default class MainContainer extends Vue {
     appStore = useAppStore();
+
     async mounted() {
         const isTokenValid = await AuthService.checkToken();
         if (isTokenValid) {
             await this.appStore.getUserDetails()
-            await this.$router.push({name: 'dashboard'}).catch(e => e)
         } else {
             await this.$router.push({name: 'login'})
         }

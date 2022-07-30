@@ -6,7 +6,6 @@
             </router-link>
             <div>
                 <div class="header-right" v-if="isLoggedIn">
-                    <div class="mr-2">{{ user.email }}</div>
                     <locale-select/>
                     <v-btn @click="logout">Выход</v-btn>
                 </div>

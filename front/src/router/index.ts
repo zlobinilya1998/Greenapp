@@ -9,6 +9,17 @@ const routes: Array<RouteConfig> = [
         path: '/app', name: 'app', component: () => import('@/components/main/MainContainer.vue'),
         children: [
             {
+                path: '/catalog',
+                component: () => import('@/components/catalog/Catalog.vue'),
+                children: [
+                    {
+                        name: 'catalog',
+                        path: '',
+                        component: () => import('@/components/catalog/Highlights.vue'),
+                    }
+                ],
+            },
+            {
                 path: '/dashboard', name: 'dashboard', component: () => import('@/components/Dashboard.vue'),
                 meta: {
                     requiredAuth: true,
@@ -25,7 +36,7 @@ const router = new VueRouter({
     routes,
 })
 
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
     next()
 })
 
