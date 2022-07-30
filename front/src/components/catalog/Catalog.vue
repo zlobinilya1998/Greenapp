@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="flex: 1">
         <h2 v-html="$route.meta.title" class="mb-4"/>
         <router-view/>
     </div>

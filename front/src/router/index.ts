@@ -9,7 +9,7 @@ const routes: Array<RouteConfig> = [
         path: '/app', name: 'app', component: () => import('@/components/main/MainContainer.vue'),
         children: [
             {
-                path: '/catalog',
+                path: 'catalog',
                 component: () => import('@/components/catalog/Catalog.vue'),
                 children: [
                     {
@@ -23,12 +23,18 @@ const routes: Array<RouteConfig> = [
                     {
                         path: 'cart',
                         name: 'cart',
-                        component: () => import('@/components/Cart.vue'),
+                        component: () => import('@/components/cart/Cart.vue'),
                         meta: {
                             title: 'Корзина',
                         }
                     },
                 ],
+            },
+            {
+                path: 'profile',
+                name: 'profile',
+                component: () => import('@/components/profile/Profile.vue'),
+                children: [],
             },
             {
                 path: '/dashboard', name: 'dashboard', component: () => import('@/components/Dashboard.vue'),

@@ -57,7 +57,7 @@ export default class Sidebar extends Vue {
         {
             name: 'Профиль',
             icon: 'mdi-account',
-            path: 'dashboard',
+            path: 'profile',
         },
         {
             name: 'Каталог',
