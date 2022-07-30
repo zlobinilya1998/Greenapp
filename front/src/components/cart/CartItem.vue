@@ -1,7 +1,7 @@
 <template>
     <v-layout class="cart-item">
-        <v-flex shrink>
-            <v-img class="item-img" :src="item.img" max-height="120" max-width="92"/>
+        <v-flex shrink class="item-img">
+            <v-img  :src="item.img" max-height="120" max-width="92"/>
         </v-flex>
         <v-layout column>
             <p v-html="item.name" style="flex: 1"/>

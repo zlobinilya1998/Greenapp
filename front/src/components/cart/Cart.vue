@@ -1,22 +1,33 @@
 <template>
-    <div v-if="cart.length">
-        <v-layout class="delivery-info">
-            <v-flex grow>Доставка</v-flex>
-            <v-layout justify-end>
-                <div class="mr-2">
-                    <v-icon v-html="'mdi-car'"/>
-                    Курьером
-                </div>
-                <div>
-                    <v-icon v-html="'mdi-google-maps'"/>
-                    Самовывоз
-                </div>
+    <v-layout v-if="cart.length">
+        <v-flex xs12 class="mr-4">
+            <v-layout class="delivery-info">
+                <v-flex grow>Доставка</v-flex>
+                <v-layout justify-end>
+                    <div class="mr-2">
+                        <v-icon v-html="'mdi-car'"/>
+                        Курьером
+                    </div>
+                    <div>
+                        <v-icon v-html="'mdi-google-maps'"/>
+                        Самовывоз
+                    </div>
+                </v-layout>
             </v-layout>
-        </v-layout>
-        <div class="cart-products">
-            <cart-item v-for="product in cart" :item="product" :key="product.id"/>
-        </div>
-    </div>
+            <div class="cart-products">
+                <cart-item v-for="product in cart" :item="product" :key="product.id"/>
+            </div>
+        </v-flex>
+        <v-flex>
+            <div class="cart-payment">
+                <div class="pa-4">
+                    <v-btn block color="primary" v-html="'Перейти к оформлению'" class="mb-4"/>
+                    <p>Доступные способы и время доставки можно выбрать при оформлении заказа</p>
+                </div>
+                <v-divider/>
+            </div>
+        </v-flex>
+    </v-layout>
     <div v-else>
         <p v-html="$l.phrase('EmptyCart')"/>
         <p>Перейдите в
@@ -50,9 +61,10 @@ export default class Cart extends Vue {
     padding: 16px;
     margin-bottom: 20px;
 }
+
 .cart-products {
     .cart-item {
-        &:not(:last-child){
+        &:not(:last-child) {
             margin-bottom: 15px;
         }
     }
