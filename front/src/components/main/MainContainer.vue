@@ -1,7 +1,7 @@
 <template>
-    <div style="display: flex">
+    <div style="display: flex;align-items: flex-start">
         <sidebar/>
-        <router-view/>
+        <router-view style="margin-left: 20px"/>
     </div>
 </template>
 

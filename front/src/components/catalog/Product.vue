@@ -1,7 +1,7 @@
 <template>
     <div class="catalog-product">
         <div class="product-inner">
-            <v-img :src="item.img" max-height="250" max-width="250" class="product-img">
+            <v-img :src="item.img" contain max-height="250" max-width="250" class="product-img">
                 <div class="product-discount" v-html="`—${discountPercent()}`"/>
             </v-img>
             <p class="product-old-price" v-html="localeOldPrice()"/>
@@ -38,12 +38,15 @@ export default class Product extends Vue {
 
 .catalog-product {
     padding: 10px;
-
+    display: flex;
     .product-inner {
         display: flex;
         flex-direction: column;
         background: white;
         color: var(--color-muted);
+        border-radius: 10px;
+        overflow: hidden;
+        flex: 1;
     }
 
     .product-old-price {
@@ -51,6 +54,7 @@ export default class Product extends Vue {
         padding: 10px;
         position: relative;
         max-width: fit-content;
+        font-size: 0.9rem;
         &:before {
             content: "";
             border-bottom: 1px solid red;
@@ -76,6 +80,7 @@ export default class Product extends Vue {
 
     .product-img {
         position: relative;
+        margin-top: 10px;
     }
 
     .product-discount {
