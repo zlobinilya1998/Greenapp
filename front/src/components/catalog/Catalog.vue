@@ -1,14 +1,14 @@
 <template>
     <div style="flex: 1">
-        <h2 v-html="$route.meta.title" class="mb-4"/>
-        <router-view/>
+        <h2 v-html="$route.meta.title" class="mb-4" />
+        <router-view />
     </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from "vue-property-decorator"
-import {useCatalogStore} from "@/store/catalog";
-import {TProduct} from "@/models/entites/Product";
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { useCatalogStore } from "@/store/catalog";
+import { TProduct } from "@/models/entites/Product";
 
 @Component({})
 export default class Catalog extends Vue {
@@ -18,18 +18,9 @@ export default class Catalog extends Vue {
         return this.catalogStore.cart;
     }
 
-    @Watch('cart', {deep: true})
+    @Watch("cart", { deep: true })
     cartChange(val: TProduct[]) {
-        localStorage.setItem('cart', JSON.stringify(val))
-    }
-    loadCartFromStorage() {
-        const cart = localStorage.getItem('cart');
-        if (!cart) return;
-        this.catalogStore.cart = JSON.parse(cart);
-    }
-
-    mounted(){
-        this.loadCartFromStorage();
+        localStorage.setItem("cart", JSON.stringify(val));
     }
 }
 </script>

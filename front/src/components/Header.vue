@@ -1,12 +1,12 @@
 <template>
     <v-app-bar class="header">
         <div class="header-inner">
-            <router-link :to="{name: 'dashboard'}">
-                <img src="../assets/logo.png" style="max-width: 240px;height: 45px" alt="logo">
+            <router-link :to="{ name: 'dashboard' }">
+                <img src="../assets/logo.png" style="max-width: 240px; height: 45px" alt="logo" />
             </router-link>
             <div>
                 <div class="header-right" v-if="isLoggedIn">
-                    <locale-select/>
+                    <locale-select />
                     <v-btn @click="logout">Выход</v-btn>
                 </div>
             </div>
@@ -15,14 +15,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from "vue-property-decorator"
-import {useAppStore} from "@/store/appstore";
-import {AuthService} from "@/services/AuthService";
-import {Locales, LocalizationKey} from "@/localization";
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { useAppStore } from "@/store/appstore";
+import { AuthService } from "@/services/AuthService";
+import { Locales, LocalizationKey } from "@/localization";
 import LocaleSelect from "@/components/shared/LocaleSelect.vue";
 
 @Component({
-    components: {LocaleSelect}
+    components: { LocaleSelect },
 })
 export default class Header extends Vue {
     appStore = useAppStore();
@@ -37,7 +37,7 @@ export default class Header extends Vue {
 
     logout() {
         this.appStore.logout();
-        this.$router.push({name: 'login'})
+        this.$router.push({ name: "login" });
     }
 }
 </script>
@@ -58,7 +58,6 @@ export default class Header extends Vue {
     align-items: center;
     flex: 1;
 }
-
 
 .header-right {
     display: flex;
