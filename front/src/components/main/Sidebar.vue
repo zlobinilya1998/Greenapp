@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-navigation-drawer permanent expand-on-hover>
+        <v-navigation-drawer permanent>
             <v-list v-if="user">
                 <v-list-item class="px-2">
                     <v-list-item-avatar>
@@ -58,6 +58,11 @@ export default class Sidebar extends Vue {
             name: 'Профиль',
             icon: 'mdi-account',
             path: 'profile',
+        },
+        {
+            name: 'Администрирование',
+            icon: 'mdi-user',
+            path: 'admin',
         },
         {
             name: 'Каталог',

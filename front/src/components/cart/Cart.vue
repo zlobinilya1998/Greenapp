@@ -1,6 +1,6 @@
 <template>
-    <v-layout v-if="cart.length">
-        <v-flex xs12 class="mr-4">
+    <v-layout v-if="cart.length" column>
+        <v-flex>
             <v-layout class="delivery-info">
                 <v-flex grow>Доставка</v-flex>
                 <v-layout justify-end>
@@ -20,9 +20,9 @@
         </v-flex>
         <v-flex>
             <div class="cart-payment">
-                <div class="pa-4">
-                    <v-btn block color="primary" v-html="'Перейти к оформлению'" class="mb-4"/>
+                <div>
                     <p>Доступные способы и время доставки можно выбрать при оформлении заказа</p>
+                    <v-btn block color="primary" v-html="'Перейти к оформлению'" class="mb-4"/>
                 </div>
                 <v-divider/>
             </div>
@@ -68,5 +68,10 @@ export default class Cart extends Vue {
             margin-bottom: 15px;
         }
     }
+}
+.cart-payment {
+    margin-top: 15px;
+    margin-left: auto;
+    max-width: 400px;
 }
 </style>

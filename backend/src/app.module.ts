@@ -7,6 +7,8 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
 import { TokenModule } from './token/token.module';
+import { ProductModule } from './product/product.module';
+import { OrderModule } from './order/order.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,6 +25,8 @@ import { TokenModule } from './token/token.module';
     AuthModule,
     TaskModule,
     TokenModule,
+    ProductModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

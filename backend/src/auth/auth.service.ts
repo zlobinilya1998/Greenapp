@@ -64,7 +64,6 @@ export class AuthService {
       isBanned: user.isBanned,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-      locale: user.locale,
     };
     return {
       token: this.jwtService.sign(payload),

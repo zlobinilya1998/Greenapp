@@ -54,6 +54,3 @@ export default class TokenTable extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>

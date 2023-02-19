@@ -6,7 +6,7 @@
             </v-img>
             <p class="product-old-price" v-html="localeOldPrice"/>
             <p class="product-new-price" v-html="localeNewPrice"/>
-            <p class="product-name" v-html="item.name"/>
+            <p class="product-name" v-html="item.title"/>
             <div class="product-actions">
                 <v-slide-x-transition mode="out-in">
                     <div v-if="isItemOnCart">
@@ -57,11 +57,11 @@ export default class Product extends Vue {
     }
 
     get discountPercent() {
-        return getDiscountPercent(this.item.newPrice, this.item.oldPrice)
+        return getDiscountPercent(this.item.price, this.item.oldPrice)
     }
 
     get localeNewPrice() {
-        return getLocalePrice(this.item.newPrice)
+        return getLocalePrice(this.item.price)
     }
 
     get localeOldPrice() {

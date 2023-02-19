@@ -22,5 +22,9 @@ export default class Catalog extends Vue {
     cartChange(val: TProduct[]) {
         localStorage.setItem("cart", JSON.stringify(val));
     }
+
+    created(){
+        this.catalogStore.getProducts();
+    }
 }
 </script>

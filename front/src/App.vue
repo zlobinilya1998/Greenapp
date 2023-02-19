@@ -27,7 +27,8 @@ import Localization from "@/components/Localization.vue";
         Header,
     }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+}
 
 
 </script>

@@ -1,7 +1,7 @@
 export type TProduct = {
     oldPrice: number,
-    newPrice: number,
-    name: string,
+    price: number,
+    title: string,
     liked: boolean,
     img: string,
     id: number,

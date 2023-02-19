@@ -4,10 +4,10 @@
             <v-img  :src="item.img" max-height="120" max-width="92"/>
         </v-flex>
         <v-layout column>
-            <p v-html="item.name" style="flex: 1"/>
+            <p v-html="item.title" style="flex: 1"/>
             <div>
                 <v-btn text v-html="'В избранное'"/>
-                <v-btn text v-html="'Удалить'"/>
+                <v-btn text v-html="'Удалить'" @click="removeItem"/>
             </div>
         </v-layout>
         <v-flex>
@@ -26,11 +26,13 @@
 import {Component, Prop, Vue} from "vue-property-decorator"
 import {TProduct} from "@/models/entites/Product";
 import {getLocalePrice} from "@/helpers/Prices";
+import {useCatalogStore} from "@/store/catalog";
 
 @Component({})
 export default class CartItem extends Vue {
     @Prop({required: true}) item: TProduct;
 
+    catalogStore = useCatalogStore();
 
     get oldPriceWithQty() {
         const price = this.item.oldPrice * this.item.qty;
@@ -38,14 +40,18 @@ export default class CartItem extends Vue {
     }
 
     get newPriceWithQty() {
-        const price = this.item.newPrice * this.item.qty;
+        const price = this.item.price * this.item.qty;
         return getLocalePrice(price)
     }
 
     get discount() {
         const oldPrice = this.item.oldPrice * this.item.qty;
-        const newPrice = this.item.newPrice * this.item.qty;
+        const newPrice = this.item.price * this.item.qty;
         return getLocalePrice(oldPrice - newPrice);
+    }
+
+    removeItem() {
+        this.catalogStore.removeFromCart(this.item.id);
     }
 }
 </script>

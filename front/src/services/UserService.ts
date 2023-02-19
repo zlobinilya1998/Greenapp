@@ -7,4 +7,9 @@ export class UserService {
         const { data } = await Axios.get(this.serviceUrl + '/details');
         return data as TUser;
     }
+
+    static async getAll(){
+        const { data } = await Axios.get(this.serviceUrl);
+        return data as TUser[];
+    }
 }

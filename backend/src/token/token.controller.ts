@@ -13,7 +13,10 @@ import { TokenService } from './token.service';
 import { CreateTokenDto } from './dto/create-token.dto';
 import { UpdateTokenDto } from './dto/update-token.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard';
+import {ApiTags} from "@nestjs/swagger";
 
+
+@ApiTags('Токен')
 @UseGuards(JwtAuthGuard)
 @Controller('token')
 export class TokenController {

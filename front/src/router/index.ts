@@ -42,6 +42,12 @@ const routes: Array<RouteConfig> = [
                     requiredAuth: true,
                 },
             },
+            {
+                path: '/admin', name: 'admin', component: () => import('@/components/admin/AdminScreen.vue'),
+                meta: {
+                    requiredAuth: true,
+                },
+            },
         ]
     },
     authRoutes,
