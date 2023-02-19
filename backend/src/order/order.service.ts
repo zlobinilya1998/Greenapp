@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable, Post, Req } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Order } from './entities/order.entity';
 import { User } from '../user/entities/user.entity';
+import { CreateTaskDto } from '../task/dto/create-task.dto';
 
 @Injectable()
 export class OrderService {
@@ -13,8 +14,15 @@ export class OrderService {
     return order;
   }
 
-  findAll() {
-    return `This action returns all order`;
+  async findAll(userId: number) {
+    return await this.orderRepository.findAll({
+      where: {
+        customer_id: userId,
+      },
+      attributes: {
+        exclude: ['customer_id']
+      }
+    });
   }
 
   async findOne(id: number) {
@@ -22,7 +30,7 @@ export class OrderService {
       include: [
         {
           model: User,
-          attributes: ['id','firstName','lastName','email']
+          attributes: ['id', 'firstName', 'lastName', 'email'],
         },
       ],
       where: {
@@ -30,7 +38,7 @@ export class OrderService {
       },
       attributes: {
         exclude: ['customer_id'],
-      }
+      },
     });
   }
 
