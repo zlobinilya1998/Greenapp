@@ -14,6 +14,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard';
 import { ApiTags } from '@nestjs/swagger';
+import { IsAdminGuard } from '../auth/is-admin-guard';
+import { User } from './entities/user.entity';
 
 @ApiTags('Пользователь')
 @Controller('user')
@@ -26,6 +28,7 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard, IsAdminGuard)
   findAll() {
     return this.userService.findAll();
   }

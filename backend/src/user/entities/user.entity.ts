@@ -30,6 +30,9 @@ export class User extends Model<User, UserCreationInterface> {
   @Column({ defaultValue: false })
   isBanned: boolean;
 
+  @Column({ defaultValue: false })
+  isAdmin: boolean;
+
   @HasMany(() => Task)
   tasks: Task[];
 }

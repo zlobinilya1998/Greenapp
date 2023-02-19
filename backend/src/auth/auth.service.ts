@@ -62,6 +62,7 @@ export class AuthService {
       email: user.email,
       id: user.id,
       isBanned: user.isBanned,
+      isAdmin: user.isAdmin,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };
