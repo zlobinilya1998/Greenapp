@@ -3,12 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
-import { TaskModule } from './task/task.module';
-import { TokenModule } from './token/token.module';
-import { ProductModule } from './product/product.module';
-import { OrderModule } from './order/order.module';
+import { UserModule } from '_R/user/user.module';
+import { AuthModule } from '_R/auth/auth.module';
+import { TaskModule } from '_R/task/task.module';
+import { TokenModule } from '_R/token/token.module';
+import { ProductModule } from '_R/product/product.module';
+import { OrderModule } from '_R/order/order.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
